@@ -11,8 +11,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 load_dotenv()
 
-email = os.getenv("EMAIL_LINKEDIN")
-senha = os.getenv("SENHA_LINKEDIN")
+email = os.getenv("EMAIL_INSTAGRAM")
+senha = os.getenv("SENHA_INSTAGRAM")
 
 ARQUIVO_IDS = "ids_salvos_linkedin.json"
 TOKEN = os.getenv("TOKEN_TELEGRAM")
