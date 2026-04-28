@@ -1,65 +1,30 @@
-Date: 27/4/2026
-Time: 15:19
-Phone Number: +5521977787777
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:21
-Phone Number: +5521977787777
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:34
-Group ID: 120363425623107514
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:35
-Group ID: 120363425623107514@g.us
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:36
-Group ID: 120363425623107514
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:39
-Group ID: 120363425623107514
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:40
-Group ID: 120363425623107514
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:41
-Group ID: 120363425623107514
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:44
-Group ID: 120363425623107514@g.us
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:49
-Group ID: 120363294949554597
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:51
-Group ID: 120363294949554597
-Message: Oi
---------------------
-Date: 27/4/2026
-Time: 15:59
+Date: 28/4/2026
+Time: 12:31
 Group ID: DW8NpQaqpBKDbXyW9D15ll
-Message: Oi
+Message: Teste
 --------------------
-Date: 27/4/2026
-Time: 16:1
+Date: 28/4/2026
+Time: 14:4
 Group ID: DW8NpQaqpBKDbXyW9D15ll
-Message: 🛎️ *NOVA POSTAGEM!* 🛎️🏣 *EMPRESA:* a🗓️ *DATA* b🕐 *HORA* c🔗 *LINK:* d
+Message: *NOVA POSTAGEM!**EMPRESA:* Protest*DATA:* 28/04/2026*HORA:* 14:04:12*LINK:* https://www.linkedin.com/feed/update/urn:li:activity:7454883318216519683
+--------------------
+Date: 28/4/2026
+Time: 14:8
+Group ID: DW8NpQaqpBKDbXyW9D15ll
+Message: *NOVA POSTAGEM!**EMPRESA:* Protest*DATA:* 28/01/2026*HORA:* 12h*LINK:* www.linkedin.link.com.br
+--------------------
+Date: 28/4/2026
+Time: 14:49
+Group ID: DW8NpQaqpBKDbXyW9D15ll
+Message: *NOVA POSTAGEM!**EMPRESA:* Protest*DATA:* 28/01/2026*HORA:* 12h*LINK:* www.linkedin.link.com.br
+--------------------
+Date: 28/4/2026
+Time: 14:53
+Group ID: DW8NpQaqpBKDbXyW9D15ll
+Message: *NOVA POSTAGEM!**EMPRESA:* Protest*DATA:* 28;01;2026*HORA:* 12;01;58*LINK:* www.linkedin.link.com.br
+--------------------
+Date: 28/4/2026
+Time: 15:14
+Group ID: DW8NpQaqpBKDbXyW9D15ll
+Message: *NOVA POSTAGEM!**EMPRESA:* Protest*DATA:* 28|04|2026*HORA:* 15:14:15*LINK:* https://www.linkedin.com/feed/update/urn:li:activity:7454955116073385984
 --------------------

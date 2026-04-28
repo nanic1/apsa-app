@@ -6,6 +6,8 @@ from datetime import datetime
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import pywhatkit as kit
 
 load_dotenv()
 
@@ -14,7 +16,7 @@ senha = os.getenv("SENHA_LINKEDIN")
 
 ARQUIVO_IDS = "ids_salvos_linkedin.json"
 TOKEN = os.getenv("TOKEN_TELEGRAM")
-GROUP_ID = os.getenv("ID_TELEGRAM")
+GROUP_ID = os.getenv("ID_WHATS")
 
 # guarda último ID
 ultimos_ids = {}
@@ -34,14 +36,19 @@ def salvar_ids():
     except Exception as e:
         print(f"Erro ao salvar JSON: {e}")
 
-def enviar_mensagem(msg):
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-    payload = {
-        "chat_id": GROUP_ID,
-        "text": msg,
-        "parse_mode": "HTML"
-    }
-    requests.post(url, data=payload)
+def abrir_whatsapp(driver):
+    driver.get("https://web.whatsapp.com")
+    print("Logue no whatsapp! (20sec)")
+    time.sleep(20)
+
+def enviar_whatsapp(msg):
+    driver.get(f"https://web.whatsapp.com/accept?code={GROUP_ID}")
+    time.sleep(15)
+    box = driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span/div/div/div/div[3]/div[1]/p')
+    box.send_keys(msg)
+    time.sleep(1)
+    box.send_keys(Keys.ENTER)
+    time.sleep(3)
 
 def login(driver):
     driver.get("https://www.linkedin.com/login")
@@ -49,9 +56,9 @@ def login(driver):
 
     driver.find_element(By.ID, "username").send_keys(email)
     driver.find_element(By.ID, "password").send_keys(senha)
-    driver.find_element(By.XPATH, '//*[@type="submit"]').click()
+    driver.find_element(By.XPATH, '//*[@id="organic-div"]/form/div[4]/button').click()
 
-    time.sleep(45)
+    time.sleep(25)
 
 
 def pegar_post(driver, url):
@@ -100,6 +107,7 @@ empresas = data["linkedin"]
 ultimos_ids = carregar_ids()
 
 driver = webdriver.Chrome()
+abrir_whatsapp(driver)
 login(driver)
 
 print("Monitorando posts...\n")
@@ -115,6 +123,7 @@ while True:
             if not post_id:
                 continue
 
+            enviar_whatsapp("Teste Teste Teste")
             # primeira vez (não printa)
             if nome not in ultimos_ids:
                 ultimos_ids[nome] = post_id
@@ -123,14 +132,14 @@ while True:
 
             elif ultimos_ids[nome] != post_id:
                 today = datetime.now()
-                data = today.strftime("%d/%m/%Y")
+                data = today.strftime("%d|%m|%Y")
                 horas = today.strftime("%H:%M:%S")
-                enviar_mensagem(
-                    "🛎️ <b>NOVA POSTAGEM!</b> 🛎️\n"
-                    f"🏣 <b>EMPRESA:</b> {nome}\n"
-                    f"🗓️ <b>DATA</b> {data}\n"
-                    f"🕐 <b>HORA</b> {horas}\n"
-                    f"🔗 <b>LINK:</b> {link_post}"
+                enviar_whatsapp(
+                    "*NOVA POSTAGEM!*\n"
+                    f"*EMPRESA:* {nome}\n"
+                    f"*DATA:* {data}\n"
+                    f"*HORA:* {horas}\n"
+                    f"*LINK:* {link_post}"
                     )
                 
                 ultimos_ids[nome] = post_id
