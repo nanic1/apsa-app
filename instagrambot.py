@@ -14,7 +14,7 @@ load_dotenv()
 email = os.getenv("EMAIL_INSTAGRAM")
 senha = os.getenv("SENHA_INSTAGRAM")
 
-ARQUIVO_IDS = "ids_salvos_linkedin.json"
+ARQUIVO_IDS = "ids_salvos_instagram.json"
 TOKEN = os.getenv("TOKEN_TELEGRAM")
 GROUP_ID = os.getenv("ID_TELEGRAM")
 
