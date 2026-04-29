@@ -7,6 +7,7 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 import pywhatkit as kit
 
 load_dotenv()
@@ -16,10 +17,20 @@ senha = os.getenv("SENHA_LINKEDIN")
 
 ARQUIVO_IDS = "ids_salvos_linkedin.json"
 TOKEN = os.getenv("TOKEN_TELEGRAM")
-GROUP_ID = os.getenv("ID_WHATS")
+GROUP_ID_WHATS = os.getenv("ID_WHATS")
+GROUP_ID_TELEGRAM = os.getenv("ID_TELEGRAM")
 
 # guarda último ID
 ultimos_ids = {}
+
+def enviar_telegram(msg):
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    payload = {
+        "chat_id": GROUP_ID_TELEGRAM,
+        "text": msg,
+        "parse_mode": "HTML"
+    }
+    requests.post(url, data=payload)
 
 def carregar_ids():
     try:
@@ -39,20 +50,27 @@ def salvar_ids():
 def abrir_whatsapp(driver):
     driver.get("https://web.whatsapp.com")
     print("Logue no whatsapp! (20sec)")
-    time.sleep(20)
+    time.sleep(30)
 
 def enviar_whatsapp(msg):
-    driver.get(f"https://web.whatsapp.com/accept?code={GROUP_ID}")
-    time.sleep(15)
+    driver.get(f"https://web.whatsapp.com/accept?code={GROUP_ID_WHATS}")
+    time.sleep(20)
     box = driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span/div/div/div/div[3]/div[1]/p')
-    box.send_keys(msg)
-    time.sleep(1)
+    actions = ActionChains(driver)
+
+    linhas = msg.split("\n")
+    for i, linha in enumerate(linhas):
+        box.send_keys(linha)
+        if i < len(linhas) - 1:
+            actions.key_down(Keys.SHIFT).send_keys(Keys.ENTER).key_up(Keys.SHIFT).perform()
+
+    time.sleep(20)
     box.send_keys(Keys.ENTER)
     time.sleep(3)
 
 def login(driver):
     driver.get("https://www.linkedin.com/login")
-    time.sleep(3)
+    time.sleep(5)
 
     driver.find_element(By.ID, "username").send_keys(email)
     driver.find_element(By.ID, "password").send_keys(senha)
@@ -123,7 +141,14 @@ while True:
             if not post_id:
                 continue
 
-            enviar_whatsapp("Teste Teste Teste")
+            enviar_whatsapp(
+                    "*NOVA POSTAGEM!*\n"
+                    f"*EMPRESA:* nome\n"
+                    f"*DATA:* 01/01/2026\n"
+                    f"*HORA:* 12:00:00\n"
+                    f"*LINK:* https://www.linkedin.com/posts/conacimoveis_conac-serconacunica-culturaconac-activity-7454980962662223872-e2rm/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEHBmq8BNa_bXQT6u6jR0eeJ9ycVpelqYtk"
+                    )
+            
             # primeira vez (não printa)
             if nome not in ultimos_ids:
                 ultimos_ids[nome] = post_id
@@ -134,12 +159,12 @@ while True:
                 today = datetime.now()
                 data = today.strftime("%d|%m|%Y")
                 horas = today.strftime("%H:%M:%S")
-                enviar_whatsapp(
-                    "*NOVA POSTAGEM!*\n"
-                    f"*EMPRESA:* {nome}\n"
-                    f"*DATA:* {data}\n"
-                    f"*HORA:* {horas}\n"
-                    f"*LINK:* {link_post}"
+                enviar_telegram(
+                    "🛎️ <b>NOVA POSTAGEM!</b> 🛎️\n"
+                    f"🏣 <b>EMPRESA:</b> {nome}\n"
+                    f"🗓️ <b>DATA</b> {data}\n"
+                    f"🕐 <b>HORA</b> {horas}\n"
+                    f"🔗 <b>LINK:</b> {link_post}"
                     )
                 
                 ultimos_ids[nome] = post_id
