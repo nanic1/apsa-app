@@ -125,7 +125,7 @@ empresas = data["linkedin"]
 ultimos_ids = carregar_ids()
 
 driver = webdriver.Chrome()
-abrir_whatsapp(driver)
+#abrir_whatsapp(driver)
 login(driver)
 
 print("Monitorando posts...\n")
@@ -141,13 +141,13 @@ while True:
             if not post_id:
                 continue
 
-            enviar_whatsapp(
-                    "*NOVA POSTAGEM!*\n"
-                    f"*EMPRESA:* nome\n"
-                    f"*DATA:* 01/01/2026\n"
-                    f"*HORA:* 12:00:00\n"
-                    f"*LINK:* https://www.linkedin.com/posts/conacimoveis_conac-serconacunica-culturaconac-activity-7454980962662223872-e2rm/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEHBmq8BNa_bXQT6u6jR0eeJ9ycVpelqYtk"
-                    )
+            #enviar_whatsapp(
+                    #"*NOVA POSTAGEM!*\n"
+                    #f"*EMPRESA:* nome\n"
+                    #f"*DATA:* 01/01/2026\n"
+                    #f"*HORA:* 12:00:00\n"
+                    #f"*LINK:* https://www.linkedin.com/posts/conacimoveis_conac-serconacunica-culturaconac-activity-7454980962662223872-e2rm/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEHBmq8BNa_bXQT6u6jR0eeJ9ycVpelqYtk"
+                    #)
             
             # primeira vez (não printa)
             if nome not in ultimos_ids:
