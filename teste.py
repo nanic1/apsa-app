@@ -5,6 +5,7 @@ import os
 import json
 from datetime import datetime
 import requests
+from zoneinfo import ZoneInfo
 
 load_dotenv()
 
@@ -49,7 +50,7 @@ def pegar_post(page, url):
             url += "?sortBy=recent"
 
     page.goto(url)
-    time.sleep(5)
+    time.sleep(10)
 
     posts = page.locator("div.feed-shared-update-v2")
 
@@ -111,9 +112,16 @@ with sync_playwright() as pw:
                     print(f"[INIT] {nome}")
 
                 elif ultimos_ids[nome] != post_id:
-                    today = datetime.now()
+                    today = datetime.now(ZoneInfo("America/Sao_Paulo"))
                     data = today.strftime("%d/%m/%Y")
                     horas = today.strftime("%H:%M:%S")
+                    print(
+                        "🛎️ <b>NOVA POSTAGEM!</b> 🛎️\n"
+                        f"🏣 <b>EMPRESA:</b> {nome}\n"
+                        f"🗓️ <b>DATA</b> {data}\n"
+                        f"🕐 <b>HORA</b> {horas}\n"
+                        f"🔗 <b>LINK:</b> {link_post}"
+                        )
                     enviar_telegram(
                         "🛎️ <b>NOVA POSTAGEM!</b> 🛎️\n"
                         f"🏣 <b>EMPRESA:</b> {nome}\n"
