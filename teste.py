@@ -3,9 +3,8 @@ import time
 from dotenv import load_dotenv
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import requests
-from zoneinfo import ZoneInfo
 
 load_dotenv()
 
@@ -112,7 +111,8 @@ with sync_playwright() as pw:
                     print(f"[INIT] {nome}")
 
                 elif ultimos_ids[nome] != post_id:
-                    today = datetime.now(ZoneInfo("America/Sao_Paulo"))
+                    tz_br = timezone(timedelta(hours=-3))
+                    today = datetime.now(tz_br)
                     data = today.strftime("%d/%m/%Y")
                     horas = today.strftime("%H:%M:%S")
                     print(
@@ -135,8 +135,9 @@ with sync_playwright() as pw:
 
             except Exception as e:
                 print(f"Erro em {nome}: {e}")
-
-        today = datetime.now()
+                
+        tz_br = timezone(timedelta(hours=-3))
+        today = datetime.now(tz_br)
         horas = today.strftime("%H:%M:%S")
         print(f"Varredura completa as [{horas}], reiniciando varredura.\n")
         time.sleep(5)
